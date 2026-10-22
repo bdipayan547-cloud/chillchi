@@ -1,156 +1,1237 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#11130f" />
-<meta name="description" content="CHILLCHI — the laid-back memecoin with city-night energy." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c0d0a">
+
 <title>CHILLCHI — Stay Chill. Move Different.</title>
+
 <style>
-  :root{
-    --bg:#0d0f0b; --panel:#151812; --panel2:#1b1f17; --olive:#929a7d;
-    --cream:#f1ead7; --muted:#a6aa9c; --lime:#c5d27b; --orange:#e47b3d;
-    --line:rgba(241,234,215,.12); --shadow:0 22px 70px rgba(0,0,0,.45);
-    --radius:22px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--cream);line-height:1.5;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  button{font:inherit}
-  .noise{position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
-  .wrap{width:min(1180px,92%);margin:auto}
-  nav{position:fixed;z-index:20;top:18px;left:50%;transform:translateX(-50%);width:min(1120px,92%);display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 18px;background:rgba(16,18,13,.78);border:1px solid var(--line);border-radius:999px;backdrop-filter:blur(18px);box-shadow:0 12px 40px rgba(0,0,0,.25)}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.08em}
-  .brand-dot{width:29px;height:29px;border-radius:50%;background:var(--lime);box-shadow:0 0 28px rgba(197,210,123,.3);position:relative}
-  .brand-dot:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#11130f;left:9px;top:9px}
-  .links{display:flex;gap:26px;color:#c9cabb;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-  .links a:hover{color:var(--lime)}
-  .nav-cta,.hero-btn{background:var(--cream);color:#11130f;border:0;border-radius:999px;padding:11px 18px;font-weight:900;cursor:pointer;transition:.25s transform,.25s box-shadow}
-  .nav-cta:hover,.hero-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(241,234,215,.18)}
+:root{
+    --bg:#0b0d09;
+    --bg2:#11140e;
+    --panel:#151912;
+    --panel2:#1b2017;
+    --cream:#f2ead7;
+    --muted:#a7aa9c;
+    --lime:#c8d77c;
+    --olive:#899276;
+    --orange:#e77d3d;
+    --red:#b94732;
+    --line:rgba(242,234,215,.12);
+    --shadow:0 25px 70px rgba(0,0,0,.5);
+}
 
-  .hero{min-height:900px;position:relative;display:flex;align-items:center;padding:150px 0 90px;background:radial-gradient(circle at 70% 38%,rgba(146,154,125,.17),transparent 33%),linear-gradient(180deg,#11140e 0%,#0d0f0b 78%)}
-  .hero:before{content:"";position:absolute;inset:auto -10% 0;height:34%;background:linear-gradient(180deg,transparent,#0d0f0b 55%);pointer-events:none}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px;position:relative;z-index:2}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}
-  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 18px var(--orange)}
-  h1{font-size:clamp(64px,10vw,132px);line-height:.8;letter-spacing:-.075em;font-weight:1000;text-transform:uppercase}
-  h1 span{color:var(--lime);display:block}
-  .hero-copy{max-width:570px;margin-top:30px;color:#b4b7a9;font-size:17px}
-  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-  .hero-btn{padding:14px 22px;font-size:14px}
-  .hero-btn.alt{background:transparent;color:var(--cream);border:1px solid var(--line)}
-  .hero-btn.alt:hover{background:rgba(255,255,255,.05)}
-  .ticker{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px;color:#777c70;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-  .ticker b{color:#aeb39f}
-  .character{position:relative;display:flex;justify-content:center;align-items:center;min-height:570px}
-  .character .halo{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(197,210,123,.22),rgba(197,210,123,.04) 46%,transparent 70%);filter:blur(2px)}
-  .character img{width:min(540px,100%);position:relative;z-index:2;filter:drop-shadow(0 30px 35px rgba(0,0,0,.5));animation:float 5s ease-in-out infinite}
-  @keyframes float{50%{transform:translateY(-10px) rotate(.5deg)}}
-  .sticker{position:absolute;right:5%;bottom:10%;z-index:4;background:var(--orange);color:#11130f;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:1000;transform:rotate(-5deg);box-shadow:8px 8px 0 #090a08}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-  .road{height:88px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#12140f;display:flex;align-items:center;overflow:hidden;white-space:nowrap}
-  .road-track{display:flex;gap:46px;animation:marquee 25s linear infinite;color:#646a5f;font-weight:900;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-  .road-track span{display:inline-flex;align-items:center;gap:46px}.road-track span:after{content:"✦";color:var(--orange)}
-  @keyframes marquee{to{transform:translateX(-50%)}}
+html{
+    scroll-behavior:smooth;
+}
 
-  section{padding:110px 0}
-  .section-head{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:42px}
-  .kicker{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
-  h2{font-size:clamp(38px,6vw,72px);line-height:.92;letter-spacing:-.06em;text-transform:uppercase}
-  .section-head p{max-width:390px;color:#94998b;font-size:14px}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:28px;min-height:230px;box-shadow:var(--shadow);transition:.25s transform,.25s border-color}
-  .card:hover{transform:translateY(-6px);border-color:rgba(197,210,123,.3)}
-  .num{font-size:12px;color:var(--lime);font-weight:900;letter-spacing:.1em}
-  .card h3{font-size:25px;letter-spacing:-.03em;margin:45px 0 10px}
-  .card p{color:#92978b;font-size:14px}
+body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
 
-  .token{background:linear-gradient(180deg,#0d0f0b,#12150f)}
-  .token-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .token-box{border:1px solid var(--line);border-radius:var(--radius);background:#11140f;padding:34px;box-shadow:var(--shadow)}
-  .contract{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0b0d09;margin-top:22px}
-  .contract code{color:#b8bdac;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
-  .copy{border:1px solid var(--line);background:#1b2017;color:var(--cream);padding:9px 13px;border-radius:10px;cursor:pointer;font-weight:800}
-  .copy:hover{background:#252c1f}
-  .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
-  .metric{padding:18px;border:1px solid var(--line);border-radius:14px;background:#151912}.metric small{display:block;color:#777d70;font-size:10px;text-transform:uppercase;letter-spacing:.1em}.metric strong{font-size:22px;margin-top:5px;display:block}
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-  .cta{padding:130px 0 150px;text-align:center;background:radial-gradient(circle at 50% 30%,rgba(228,123,61,.14),transparent 30%)}
-  .cta h2{max-width:850px;margin:auto}.cta p{color:#94998b;max-width:520px;margin:22px auto 30px}
-  footer{border-top:1px solid var(--line);padding:28px 0;color:#777d70;font-size:12px}.foot{display:flex;justify-content:space-between;gap:20px}.socials{display:flex;gap:18px}.socials a:hover{color:var(--cream)}
-  @media(max-width:850px){.links{display:none}.hero{min-height:auto;padding-top:130px}.hero-grid{grid-template-columns:1fr}.character{min-height:430px;order:-1}.character img{width:min(430px,92%)}.character .halo{width:400px;height:400px}.cards,.token-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:18px}.foot{flex-direction:column}.sticker{right:10%;bottom:4%}}
-  @media(max-width:520px){nav{top:10px}.brand{font-size:13px}.nav-cta{padding:9px 13px}.hero{padding-bottom:55px}h1{font-size:70px}.hero-copy{font-size:15px}.actions{display:grid}.hero-btn{width:100%}.character{min-height:360px}section{padding:80px 0}.card{min-height:200px}}
+button{
+    font-family:inherit;
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+.noise{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.035;
+    background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.section{
+    padding:110px 0;
+}
+
+.section-title{
+    font-size:clamp(42px,7vw,80px);
+    line-height:.9;
+    letter-spacing:-.06em;
+    text-transform:uppercase;
+}
+
+.section-title span{
+    color:var(--lime);
+}
+
+.section-subtitle{
+    color:var(--muted);
+    max-width:550px;
+    margin-top:20px;
+    font-size:16px;
+    line-height:1.7;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav{
+    position:fixed;
+    z-index:100;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1120px,92%);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 14px 12px 20px;
+    border:1px solid var(--line);
+    border-radius:50px;
+    background:rgba(12,14,10,.82);
+    backdrop-filter:blur(20px);
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    letter-spacing:.08em;
+}
+
+.logo-icon{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--lime);
+    position:relative;
+    box-shadow:0 0 25px rgba(200,215,124,.3);
+}
+
+.logo-icon:after{
+    content:"";
+    width:10px;
+    height:10px;
+    background:#10120d;
+    border-radius:50%;
+    position:absolute;
+    left:10px;
+    top:10px;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#c3c6b9;
+}
+
+.nav-links a{
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:var(--lime);
+}
+
+.nav-button{
+    border:0;
+    background:var(--cream);
+    color:#11130e;
+    border-radius:30px;
+    padding:11px 20px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.nav-button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(242,234,215,.2);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    padding:150px 0 90px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    background:
+        radial-gradient(circle at 75% 45%,rgba(137,146,118,.2),transparent 30%),
+        linear-gradient(180deg,#11140e 0%,#0b0d09 90%);
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:150px;
+    background:linear-gradient(transparent,var(--bg));
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    color:var(--lime);
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.18em;
+}
+
+.eyebrow-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 18px var(--orange);
+}
+
+.hero h1{
+    margin-top:20px;
+    font-size:clamp(70px,10vw,135px);
+    line-height:.78;
+    letter-spacing:-.085em;
+    text-transform:uppercase;
+    font-weight:1000;
+}
+
+.hero h1 span{
+    display:block;
+    color:var(--lime);
+}
+
+.hero-description{
+    margin-top:32px;
+    max-width:550px;
+    color:#b4b8aa;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:32px;
+}
+
+.btn{
+    border:0;
+    border-radius:40px;
+    padding:14px 24px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:var(--cream);
+    color:#10120e;
+}
+
+.btn-secondary{
+    border:1px solid var(--line);
+    background:#151912;
+    color:var(--cream);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.contract{
+    margin-top:22px;
+    width:min(550px,100%);
+    padding:13px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    color:#888d80;
+    font-family:monospace;
+    font-size:11px;
+}
+
+.copy{
+    border:0;
+    border-radius:8px;
+    padding:8px 12px;
+    background:var(--lime);
+    color:#10120d;
+    font-weight:900;
+    cursor:pointer;
+}
+
+/* =========================
+   CHARACTER
+========================= */
+
+.character{
+    min-height:580px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.character-halo{
+    position:absolute;
+    width:480px;
+    height:480px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,
+        rgba(200,215,124,.22),
+        rgba(200,215,124,.05) 45%,
+        transparent 70%);
+    filter:blur(8px);
+}
+
+.character img{
+    position:relative;
+    z-index:2;
+    width:min(520px,100%);
+    max-height:650px;
+    object-fit:contain;
+    filter:drop-shadow(0 35px 35px rgba(0,0,0,.55));
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) rotate(-1deg);
+    }
+
+    50%{
+        transform:translateY(-12px) rotate(1deg);
+    }
+}
+
+.sticker{
+    position:absolute;
+    z-index:4;
+    right:4%;
+    bottom:7%;
+    padding:12px 18px;
+    background:var(--orange);
+    color:#17100b;
+    font-size:12px;
+    font-weight:1000;
+    transform:rotate(-7deg);
+    box-shadow:8px 10px 0 #080a07;
+}
+
+/* =========================
+   TICKER
+========================= */
+
+.ticker{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:#11140e;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-track{
+    display:inline-flex;
+    gap:45px;
+    padding:18px 0;
+    animation:ticker 22s linear infinite;
+}
+
+.ticker span{
+    color:var(--lime);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.15em;
+}
+
+.ticker b{
+    color:#5d6356;
+}
+
+@keyframes ticker{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================
+   STORY
+========================= */
+
+.story{
+    background:#0e100c;
+}
+
+.story-grid{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.story-card{
+    padding:34px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:linear-gradient(145deg,#171b14,#10130e);
+    min-height:250px;
+    transition:.3s;
+}
+
+.story-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(200,215,124,.3);
+}
+
+.card-number{
+    color:var(--lime);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.15em;
+}
+
+.story-card h3{
+    margin-top:45px;
+    font-size:30px;
+    letter-spacing:-.04em;
+}
+
+.story-card p{
+    margin-top:14px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* =========================
+   TOKEN
+========================= */
+
+.token{
+    background:
+        linear-gradient(rgba(13,15,11,.94),rgba(13,15,11,.97)),
+        radial-gradient(circle at 20% 30%,#5f6c4b,transparent 30%);
+}
+
+.token-grid{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:18px;
+}
+
+.token-card{
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:rgba(255,255,255,.025);
+}
+
+.token-card small{
+    color:#818679;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:800;
+    font-size:10px;
+}
+
+.token-card strong{
+    display:block;
+    margin-top:12px;
+    font-size:32px;
+}
+
+.token-card p{
+    color:var(--muted);
+    margin-top:8px;
+    font-size:13px;
+}
+
+/* =========================
+   HOW TO BUY
+========================= */
+
+.buy{
+    background:#11140e;
+}
+
+.steps{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.step{
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:#151912;
+}
+
+.step-number{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:var(--lime);
+    color:#11130e;
+    font-weight:1000;
+}
+
+.step h3{
+    margin-top:35px;
+    font-size:23px;
+}
+
+.step p{
+    margin-top:10px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* =========================
+   COMMUNITY
+========================= */
+
+.community{
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.community:before{
+    content:"CHILLCHI";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:20vw;
+    font-weight:1000;
+    color:rgba(255,255,255,.018);
+    white-space:nowrap;
+    pointer-events:none;
+}
+
+.community-content{
+    position:relative;
+    z-index:2;
+}
+
+.community h2{
+    font-size:clamp(48px,8vw,100px);
+    letter-spacing:-.07em;
+    line-height:.85;
+    text-transform:uppercase;
+}
+
+.community h2 span{
+    color:var(--lime);
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:35px;
+}
+
+.social{
+    padding:14px 24px;
+    border:1px solid var(--line);
+    border-radius:50px;
+    background:#151912;
+    font-weight:900;
+    transition:.25s;
+}
+
+.social:hover{
+    background:var(--lime);
+    color:#11130e;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:30px 0;
+    background:#090b08;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.footer-text{
+    color:#73786d;
+    font-size:12px;
+}
+
+.footer-brand{
+    font-weight:1000;
+    letter-spacing:.12em;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding-top:130px;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .character{
+        order:-1;
+        min-height:430px;
+    }
+
+    .character img{
+        width:min(430px,90%);
+    }
+
+    .character-halo{
+        width:380px;
+        height:380px;
+    }
+
+    .story-grid{
+        grid-template-columns:1fr;
+    }
+
+    .token-grid{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+
+@media(max-width:500px){
+
+    nav{
+        top:10px;
+    }
+
+    .nav-button{
+        padding:9px 14px;
+        font-size:12px;
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+    .hero-description{
+        font-size:15px;
+    }
+
+    .contract{
+        font-size:9px;
+    }
+
+    .section{
+        padding:80px 0;
+    }
+
+    .story-card{
+        padding:25px;
+    }
+}
 </style>
 </head>
+
 <body>
+
 <div class="noise"></div>
+
+<!-- NAVIGATION -->
+
 <nav>
-  <a class="brand" href="#top"><span class="brand-dot"></span>CHILLCHI</a>
-  <div class="links"><a href="#story">Story</a><a href="#token">Token</a><a href="#how">How to Buy</a></div>
-  <a class="nav-cta" href="#token">Get $CHILL</a>
+
+    <a href="#" class="logo">
+        <div class="logo-icon"></div>
+        CHILLCHI
+    </a>
+
+    <div class="nav-links">
+        <a href="#story">Story</a>
+        <a href="#token">Token</a>
+        <a href="#buy">How To Buy</a>
+        <a href="#community">Community</a>
+    </div>
+
+    <a href="#buy" class="nav-button">
+        BUY CHILLCHI
+    </a>
+
 </nav>
 
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow"><i></i> The city is loud. CHILLCHI isn't.</div>
-      <h1>Stay <span>Chill.</span></h1>
-      <p class="hero-copy">Meet CHILLCHI — a laid-back memecoin built for people who move different. No corporate suit. No forced hype. Just a clean character, a strong community, and premium street energy.</p>
-      <div class="actions">
-        <a class="hero-btn" href="#token">Buy $CHILL</a>
-        <a class="hero-btn alt" href="#story">Meet CHILLCHI ↓</a>
-      </div>
-      <div class="ticker"><b>CA</b> 0x0000...CHILL &nbsp; • &nbsp; <b>Network</b> Your Chain &nbsp; • &nbsp; <b>Status</b> Just Vibing</div>
-    </div>
-    <div class="character">
-      <div class="halo"></div>
-      <img src="assets/chillchi.png" alt="CHILLCHI character" />
-      <div class="sticker">100% CHILL ENERGY</div>
-    </div>
-  </div>
-</header>
 
-<div class="road"><div class="road-track"><span>CHILLCHI</span><span>NO SUITS</span><span>GOOD VIBES</span><span>MOVE DIFFERENT</span><span>CHILLCHI</span><span>NO SUITS</span><span>GOOD VIBES</span><span>MOVE DIFFERENT</span></div></div>
+<!-- HERO -->
 
-<section id="story">
-  <div class="wrap">
-    <div class="section-head"><div><div class="kicker">01 / The Story</div><h2>Born to<br>stand out.</h2></div><p>CHILLCHI is the guy who never needs to prove he's the guy. Quiet confidence, questionable decisions, immaculate vibes.</p></div>
-    <div class="cards">
-      <article class="card"><div class="num">01</div><h3>Lowkey Icon</h3><p>Simple silhouette. Maximum personality. CHILLCHI was made to be instantly recognizable on every timeline.</p></article>
-      <article class="card"><div class="num">02</div><h3>City Energy</h3><p>Inspired by late-night drives, corner-store conversations, expensive taste and absolutely unnecessary confidence.</p></article>
-      <article class="card"><div class="num">03</div><h3>Community First</h3><p>No fake promises. The mission is simple: build a fun community and make the character impossible to ignore.</p></article>
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-grid">
+
+            <div>
+
+                <div class="eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    The chillest coin in town
+                </div>
+
+                <h1>
+                    CHILL
+                    <span>CHI</span>
+                </h1>
+
+                <p class="hero-description">
+                    No stress. No overthinking.
+                    Just CHILLCHI living life on his own terms.
+                    A premium memecoin built for people who
+                    simply don't give a damn.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#buy" class="btn btn-primary">
+                        BUY CHILLCHI
+                    </a>
+
+                    <a href="#story" class="btn btn-secondary">
+                        MEET CHILLCHI
+                    </a>
+
+                </div>
+
+                <div class="contract">
+
+                    <span id="contractText">
+                        CONTRACT: YOUR_CONTRACT_ADDRESS
+                    </span>
+
+                    <button class="copy" onclick="copyContract()">
+                        COPY
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHARACTER -->
+
+            <div class="character">
+
+                <div class="character-halo"></div>
+
+                <!--
+                    IMPORTANT:
+                    Put chillchi.png in the same folder as index.html
+                    OR change this to assets/chillchi.png
+                -->
+
+                <img
+                    src="chillchi.png"
+                    alt="CHILLCHI character"
+                >
+
+                <div class="sticker">
+                    100% CHILL
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
 </section>
 
-<section class="token" id="token">
-  <div class="wrap">
-    <div class="section-head"><div><div class="kicker">02 / The Token</div><h2>Keep it<br>simple.</h2></div><p>Replace the placeholders below with your real contract, chain and launch links before publishing.</p></div>
-    <div class="token-grid">
-      <div class="token-box">
-        <div class="kicker">Contract Address</div>
-        <div class="contract"><code id="ca">0x0000000000000000000000000000CHILL</code><button class="copy" onclick="copyCA()">Copy</button></div>
-        <div class="metrics"><div class="metric"><small>Symbol</small><strong>$CHILL</strong></div><div class="metric"><small>Supply</small><strong>1B</strong></div><div class="metric"><small>Tax</small><strong>0 / 0</strong></div><div class="metric"><small>Vibe</small><strong>100%</strong></div></div>
-      </div>
-      <div class="token-box" id="how">
-        <div class="kicker">03 / How to Buy</div>
-        <h3 style="font-size:32px;letter-spacing:-.04em;margin:4px 0 16px">Three moves. That's it.</h3>
-        <div class="card" style="padding:20px;min-height:0;margin-top:10px"><div class="num">01</div><p style="margin-top:8px">Set up your wallet and fund it with the chain's native token.</p></div>
-        <div class="card" style="padding:20px;min-height:0;margin-top:10px"><div class="num">02</div><p style="margin-top:8px">Open the official DEX link and paste the verified CHILLCHI contract.</p></div>
-        <div class="card" style="padding:20px;min-height:0;margin-top:10px"><div class="num">03</div><p style="margin-top:8px">Swap, confirm, and enter the chill zone. Always verify the contract first.</p></div>
-      </div>
+
+<!-- TICKER -->
+
+<div class="ticker">
+
+    <div class="ticker-track">
+
+        <span>CHILLCHI</span>
+        <b>✦</b>
+
+        <span>STAY CHILL</span>
+        <b>✦</b>
+
+        <span>MOVE DIFFERENT</span>
+        <b>✦</b>
+
+        <span>NO STRESS</span>
+        <b>✦</b>
+
+        <span>CHILLCHI</span>
+        <b>✦</b>
+
+        <span>STAY CHILL</span>
+        <b>✦</b>
+
+        <span>MOVE DIFFERENT</span>
+        <b>✦</b>
+
+        <span>NO STRESS</span>
+        <b>✦</b>
+
     </div>
-  </div>
+
+</div>
+
+
+<!-- STORY -->
+
+<section class="section story" id="story">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            The legend
+        </div>
+
+        <h2 class="section-title">
+            WHO IS <span>CHILLCHI?</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Somewhere between the city lights and a completely
+            unnecessary late-night drive, CHILLCHI was born.
+        </p>
+
+
+        <div class="story-grid">
+
+            <div class="story-card">
+
+                <div class="card-number">
+                    01 — THE VIBE
+                </div>
+
+                <h3>
+                    Zero stress.
+                </h3>
+
+                <p>
+                    CHILLCHI doesn't chase trends.
+                    He doesn't chase approval.
+                    He just sits back, looks cool,
+                    and lets the city move around him.
+                </p>
+
+            </div>
+
+
+            <div class="story-card">
+
+                <div class="card-number">
+                    02 — THE MISSION
+                </div>
+
+                <h3>
+                    Make memes. Have fun.
+                </h3>
+
+                <p>
+                    CHILLCHI is built around community,
+                    culture and the internet's favorite
+                    form of entertainment — memes.
+                </p>
+
+            </div>
+
+
+            <div class="story-card">
+
+                <div class="card-number">
+                    03 — THE ENERGY
+                </div>
+
+                <h3>
+                    City nights.
+                </h3>
+
+                <p>
+                    Neon streets, loud engines,
+                    expensive fits and absolutely
+                    no reason to take life too seriously.
+                </p>
+
+            </div>
+
+
+            <div class="story-card">
+
+                <div class="card-number">
+                    04 — THE RULE
+                </div>
+
+                <h3>
+                    Stay chill.
+                </h3>
+
+                <p>
+                    That's literally it.
+                    Everything else is optional.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<section class="cta">
-  <div class="wrap"><div class="kicker">Final Stop</div><h2>Don't chase the vibe.<br><span style="color:var(--lime)">Become the vibe.</span></h2><p>CHILLCHI is just getting started. Grab the links, join the community, and keep it chill.</p><div class="actions" style="justify-content:center"><a class="hero-btn" href="#token">Buy $CHILL</a><a class="hero-btn alt" href="#top">Back to top ↑</a></div></div>
+
+<!-- TOKEN -->
+
+<section class="section token" id="token">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Token info
+        </div>
+
+        <h2 class="section-title">
+            THE <span>NUMBERS</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Replace these placeholders with your actual
+            token information before launch.
+        </p>
+
+
+        <div class="token-grid">
+
+            <div class="token-card">
+
+                <small>
+                    Token
+                </small>
+
+                <strong>
+                    $CHILLCHI
+                </strong>
+
+                <p>
+                    The official CHILLCHI ticker.
+                </p>
+
+            </div>
+
+
+            <div class="token-card">
+
+                <small>
+                    Network
+                </small>
+
+                <strong>
+                    SOLANA
+                </strong>
+
+                <p>
+                    Replace if your token launches
+                    on another chain.
+                </p>
+
+            </div>
+
+
+            <div class="token-card">
+
+                <small>
+                    Supply
+                </small>
+
+                <strong>
+                    1B
+                </strong>
+
+                <p>
+                    Example supply — change this
+                    to your actual supply.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<footer><div class="wrap foot"><div>© 2026 CHILLCHI. Meme coin. Not financial advice.</div><div class="socials"><a href="#">X / Twitter</a><a href="#">Telegram</a><a href="#">Dex</a></div></div></footer>
+
+<!-- HOW TO BUY -->
+
+<section class="section buy" id="buy">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Get involved
+        </div>
+
+        <h2 class="section-title">
+            HOW TO <span>BUY</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Three simple steps to join the CHILLCHI movement.
+        </p>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Get a wallet
+                </h3>
+
+                <p>
+                    Create or connect a compatible
+                    crypto wallet.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Get SOL
+                </h3>
+
+                <p>
+                    Fund your wallet with enough SOL
+                    to make your purchase and cover fees.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Buy CHILLCHI
+                </h3>
+
+                <p>
+                    Use your chosen DEX and paste the
+                    official contract address.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section class="section community" id="community">
+
+    <div class="container community-content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Join the city
+        </div>
+
+        <h2>
+            STAY <span>CHILL.</span><br>
+            MOVE DIFFERENT.
+        </h2>
+
+        <div class="socials">
+
+            <!-- Replace these URLs -->
+
+            <a
+                href="https://x.com/"
+                target="_blank"
+                class="social"
+            >
+                X / TWITTER
+            </a>
+
+            <a
+                href="#"
+                class="social"
+            >
+                TELEGRAM
+            </a>
+
+            <a
+                href="#"
+                class="social"
+            >
+                DEX
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                CHILLCHI
+            </div>
+
+            <div class="footer-text">
+                © 2026 CHILLCHI. Stay chill.
+            </div>
+
+            <div class="footer-text">
+                MEMECOIN • COMMUNITY • CULTURE
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
 <script>
-function copyCA(){const v=document.getElementById('ca').innerText;navigator.clipboard.writeText(v);const b=document.querySelector('.copy');const old=b.innerText;b.innerText='Copied';setTimeout(()=>b.innerText=old,1100)}
+
+function copyContract(){
+
+    const address =
+        "YOUR_CONTRACT_ADDRESS";
+
+    navigator.clipboard.writeText(address)
+    .then(function(){
+
+        const button =
+            document.querySelector(".copy");
+
+        button.textContent = "COPIED!";
+
+        setTimeout(function(){
+
+            button.textContent = "COPY";
+
+        },1500);
+
+    });
+
+}
+
 </script>
+
 </body>
 </html>
+```
